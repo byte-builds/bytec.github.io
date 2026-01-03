@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BYTE // Cyber UI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS VARIABLES - THEME SYSTEM */
+        :root[data-theme="light"] {
+            --bg: #ffffff;
+            --text: #000000;
+            --accent: #000000;
+            --border: #e0e0e0;
+            --grid-opacity: 0.05;
+        }
+
+        :root[data-theme="dark"] {
+            --bg: #000000;
+            --text: #ffffff;
+            --accent: #ffffff;
+            --border: #333333;
+            --grid-opacity: 0.1;
+        }
+
+        /* GLOBAL STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* CYBER GRID BACKGROUND */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: var(--grid-opacity);
+            z-index: -1;
+        }
+
+        /* NAVIGATION */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        /* THEME TOGGLE BUTTON */
+        .theme-toggle {
+            background: var(--text);
+            color: var(--bg);
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-family: 'Space Grotesk';
+            font-weight: 700;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* HERO SECTION */
+        header {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+        }
+
+        .hero-tag {
+            font-size: 0.8rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.6;
+        }
+
+        h1 {
+            font-size: clamp(4rem, 15vw, 10rem);
+            line-height: 0.9;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .hero-cta {
+            padding: 1rem 2.5rem;
+            border: 1px solid var(--text);
+            background: transparent;
+            color: var(--text);
+            font-family: inherit;
+            cursor: pointer;
+            font-size: 1rem;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-cta:hover {
+            background: var(--text);
+            color: var(--bg);
+        }
+
+        /* CONTENT GRID */
+        section {
+            padding: 5rem 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .card {
+            padding: 2rem;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .card:hover {
+            border-color: var(--text);
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+        }
+
+        .card-num {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 0.7rem;
+            opacity: 0.4;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 3rem 5%;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            h1 { font-size: 5rem; }
+        }
+
+        /* ANIMATION */
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .cursor { display: inline-block; width: 10px; height: 1rem; background: var(--text); animation: blink 1s infinite; margin-left: 5px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">BYTE<span style="opacity: 0.4;">_</span></div>
+        <div class="nav-links">
+            <a href="#">Systems</a>
+            <a href="#">Architecture</a>
+            <a href="#">Interface</a>
+            <button class="theme-toggle" onclick="toggleTheme()">Switch Mode</button>
+        </div>
+    </nav>
+
+    <header>
+        <p class="hero-tag">Design. Build. Execute.</p>
+        <h1>BYTE<span class="cursor"></span></h1>
+        <p style="max-width: 600px; margin-bottom: 2rem; opacity: 0.7;">
+            High-performance UI/UX design and digital architecture. We build the interfaces of the future using a minimal, monochromatic aesthetic.
+        </p>
+        <button class="hero-cta">Initialize Project</button>
+    </header>
+
+    <section>
+        <div class="card">
+            <span class="card-num">01</span>
+            <h3>UI Design</h3>
+            <p>Clean, grid-based layouts focused on functional aesthetics and high-contrast accessibility.</p>
+        </div>
+        <div class="card">
+            <span class="card-num">02</span>
+            <h3>UX Research</h3>
+            <p>Deep analytical approach to user flows, ensuring every interaction serves a specific purpose.</p>
+        </div>
+        <div class="card">
+            <span class="card-num">03</span>
+            <h3>Development</h3>
+            <p>Translating complex designs into pixel-perfect, light-weight code optimized for speed.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div>© 2024 BYTE SYSTEMS</div>
+        <div>STAY CONNECTED // TWITTER // GITHUB</div>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            
+            // Local storage to remember preference
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+    </script>
+</body>
+</html>
